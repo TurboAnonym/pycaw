@@ -17,9 +17,9 @@ https://docs.microsoft.com/en-us/windows/win32/api/audiopolicy/nn-audiopolicy-ia
 """
 import time
 
-from comtypes import COMObject, COMError
+from comtypes import COMError, COMObject
 
-from pycaw.pycaw import (AudioUtilities, IAudioSessionEvents)
+from pycaw.pycaw import AudioUtilities, IAudioSessionEvents
 
 app_name = "msedge.exe"
 
@@ -74,7 +74,7 @@ def add_callback(app_name):
 
             app_found = True
             callback = AudioSessionEvents()
-            # Adding the callback by accessing the 
+            # Adding the callback by accessing the
             # IAudioSessionControl2 interface through ._ctl
             session._ctl.RegisterAudioSessionNotification(callback)
 
