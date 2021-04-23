@@ -12,10 +12,9 @@ IAudioSessionEvents.OnSessionDisconnected()         Gets called on for example S
 https://docs.microsoft.com/en-us/windows/win32/api/audiopolicy/nn-audiopolicy-iaudiosessionevents
 
 """
-
-from pycaw.pycaw import (AudioUtilities, IAudioSessionEvents)
-from comtypes import COMObject, COMError
 import time
+from comtypes import COMObject, COMError
+from pycaw.pycaw import (AudioUtilities, IAudioSessionEvents)
 
 app_name="msedge.exe"
 
@@ -59,7 +58,7 @@ def add_callback(app_name):
             callback = AudioSessionEvents()
             # Adding the callback by accessing the IAudioSessionControl2 interface through ._ctl
             session._ctl.RegisterAudioSessionNotification(callback)
-            
+
     if not app_found:
         exit("Enter the right 'app_name', start it and play something")
 
