@@ -276,7 +276,8 @@ class IAudioSessionControl(IUnknown):
     _iid_ = GUID('{F4B1A599-7266-4319-A8CA-E70ACB11E8CD}')
     _methods_ = (
         # HRESULT GetState ([out] AudioSessionState *pRetVal);
-        COMMETHOD([], HRESULT, 'NotImpl1'),
+        COMMETHOD([], HRESULT, 'GetState',
+                  (['out'], POINTER(DWORD), 'pRetVal')),
         # HRESULT GetDisplayName([out] LPWSTR *pRetVal);
         COMMETHOD([], HRESULT, 'GetDisplayName',
                   (['out'], POINTER(LPWSTR), 'pRetVal')),
@@ -622,6 +623,7 @@ class AudioSession(object):
         self._ctl = audio_session_control2
         self._process = None
         self._volume = None
+        self._callback = None
 
     def __str__(self):
         s = self.DisplayName
@@ -696,6 +698,15 @@ class AudioSession(object):
         if self._volume is None:
             self._volume = self._ctl.QueryInterface(ISimpleAudioVolume)
         return self._volume
+
+    def RegisterNotification(self, callback):
+        if self._callback is None:
+            self._callback = callback
+            self._ctl.RegisterAudioSessionNotification(self._callback)
+    
+    def UnregisterNotification(self):
+        if self._callback is not None:
+            self._ctl.UnregisterAudioSessionNotification(self._callback)
 
 
 class AudioUtilities(object):

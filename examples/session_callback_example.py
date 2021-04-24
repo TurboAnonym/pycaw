@@ -76,7 +76,7 @@ def add_callback(app_name):
             callback = AudioSessionEvents()
             # Adding the callback by accessing the
             # IAudioSessionControl2 interface through ._ctl
-            session._ctl.RegisterAudioSessionNotification(callback)
+            session.RegisterNotification(callback)
 
     if not app_found:
         exit("Enter the right 'app_name', start it and play something")
