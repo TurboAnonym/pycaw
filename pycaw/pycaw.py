@@ -703,7 +703,7 @@ class AudioSession(object):
         if self._callback is None:
             self._callback = callback
             self._ctl.RegisterAudioSessionNotification(self._callback)
-    
+
     def UnregisterNotification(self):
         if self._callback is not None:
             self._ctl.UnregisterAudioSessionNotification(self._callback)
