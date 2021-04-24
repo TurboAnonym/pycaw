@@ -29,7 +29,7 @@ class AudioSessionEvents(COMObject):
 
     def __init__(self):
         # not necessary only to decode the returned int value
-        # see mmdeviceapi.h and audiopolicy.h
+        # see audiosessiontypes.h and audiopolicy.h
         self.AudioSessionState = [
             "AudioSessionStateInactive",
             "AudioSessionStateActive",
@@ -85,6 +85,14 @@ def add_callback(app_name):
     print("Change the volume / mute state "
           "/ close the app or unplug your speaker")
     print("and watch the callbacks ;)\n")
+
+    """ session.UnregisterNotification() """
+    # # Unregister after 10 Seconds
+    # # -> No further notifications from session until resubscribed
+    # time.sleep(10)
+    # for session in sessions:
+    #     if session.Process and session.Process.name() == app_name:
+    #         session.UnregisterNotification()
 
     try:
         # wait 300 seconds for callbacks
